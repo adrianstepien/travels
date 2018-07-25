@@ -1,8 +1,6 @@
 package com.traveler.dao.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;

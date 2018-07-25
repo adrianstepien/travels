@@ -1,8 +1,41 @@
 <html>
 <head>
     <title>Map page</title>
-    <meta http-equiv="refresh" content="0; URL=https://www.google.com/maps/@63.6573804,-22.4182605,3z">
-    <meta name="keywords" content="automatic redirection">
+    <link rel="stylesheet" href="../../resources/js/leaflet/leaflet.css" />
+    <link rel="stylesheet" href="../../resources/js/leaflet-draw/leaflet.draw.css"/>
+    <link rel="stylesheet" href="../../resources/js/leaflet-toolbar/leaflet.toolbar.css"/>
+    <link rel="stylesheet" href="../../resources/js/leaflet-draw-toolbar/leaflet.draw-toolbar.css"/>
+    <script src="../../resources/js/leaflet/leaflet-src.js"></script>
+    <script src="../../resources/js/leaflet-toolbar/leaflet.toolbar-src.js"></script>
+    <script src="../../resources/js/leaflet-draw/leaflet.draw-src.js"></script>
+    <script src="../../resources/js/leaflet-draw-toolbar/leaflet.draw-toolbar.js"></script>
 </head>
-    <a href="https://www.google.com/maps/@49.317265,0.3388166,3z"></a>
+<body >
+    <div id="map" style="height: 510px; width: 500px;"></div>
+    <script>
+        var map = L.map('map').setView([41.7896,-87.5996], 15),
+            drawnItems = new L.FeatureGroup().addTo(map),
+            editActions = [
+                L.Toolbar2.EditAction.Popup.Edit,
+                L.Toolbar2.EditAction.Popup.Delete
+            ];
+        L.tileLayer("http://tile.stamen.com/terrain/{z}/{x}/{y}.jpg", {
+            attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>.'
+        }).addTo(map);
+        new L.Toolbar2.DrawToolbar({
+            position: 'topleft',
+        }).addTo(map);
+        map.on('draw:created', function(evt) {
+            var	type = evt.layerType,
+                layer = evt.layer;
+            drawnItems.addLayer(layer);
+            layer.on('click', function(event) {
+                new L.Toolbar2.EditToolbar.Popup(event.latlng, {
+                    actions: editActions
+                }).addTo(map, layer);
+            });
+        });
+    </script>
+</body>
+
 </html>
