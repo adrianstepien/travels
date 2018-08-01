@@ -7,3 +7,9 @@ CREATE TABLE TRAVEL (
     DATE_OF_END DATE,
     DESCRIPTION VARCHAR (2000)
 );
+
+create table marker (
+    marker_id int primary key,
+    lat varchar(20),
+    lng varchar(20)
+);
