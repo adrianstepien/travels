@@ -1,6 +1,5 @@
 package com.traveler;
 
-import oracle.jdbc.pool.OracleDataSource;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jackson.Jackson2ObjectMapperBuilderCustomizer;
@@ -9,8 +8,6 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
-import javax.sql.DataSource;
-import java.sql.SQLException;
 import java.util.TimeZone;
 
 @SpringBootApplication
@@ -29,8 +26,8 @@ public class WorldApplication {
 		return resolver;
 	}
 
-	@Bean
-	DataSource dataSource() throws SQLException {
+	/*@Configuration
+	public class dataSource() throws SQLException {
 		OracleDataSource dataSource = new OracleDataSource();
 		dataSource.setUser("admin");
 		dataSource.setPassword("adrian997");
@@ -38,7 +35,7 @@ public class WorldApplication {
 		dataSource.setImplicitCachingEnabled(true);
 		dataSource.setFastConnectionFailoverEnabled(true);
 		return dataSource;
-	}
+	}*/
 
 	//change the date format in JSON(eg GMT) to default
 	@Bean
